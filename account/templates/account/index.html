@@ -9,14 +9,16 @@
 
 
 {% block body %}
-<div id="index-container" class="container">
-    <h1>Hello there,</h1>
-    <h2>Welcome to WhatBytes</h2>
-    <h3>Let's get started</h3>
+<div class="wrapper">
+    <div id="div-container" class="container">
+        <h1>Hello there,</h1>
+        <h2>Welcome to WhatBytes</h2>
+        <h3>Let's get started</h3>
     
-    <div class="btn-container">
-        <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Login</a>
-        <a href="{% url 'register' %}" class="btn btn-primary btn-lg">Register</a>
+        <div class="btn-container">
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Login</a>
+            <a href="{% url 'register' %}" class="btn btn-primary btn-lg">Register</a>
+        </div>
     </div>
 </div>
 {% endblock body %}

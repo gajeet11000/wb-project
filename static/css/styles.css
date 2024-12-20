@@ -1,10 +1,21 @@
-#index-container {
-    margin-top: 100px;
-    width: 600px;
-    height: 650px;
+#div-container {
+    margin-top: 80px;
+    margin-bottom: 80px;
+    max-width: 600px;
+    min-height: 650px;
+    width: 100%;
     border: 2px solid var(--bs-body-color);
     border-radius: 10px;
     padding: 30px;
+    display: inline-block;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh; 
+    margin: 0; 
 }
 
 .btn-container {
@@ -13,4 +24,9 @@
 
 .btn-container>.btn {
     margin-right: 20px;
+}
+
+.sbmt-div {
+    display: flex;
+    justify-content: center;
 }
