@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .forms import CreateUserForm, LoginForm
 from django.contrib import auth
 
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index(request):
     return render(request, 'account/index.html')
@@ -33,8 +34,14 @@ def register(request):
     
     return render(request, 'account/register.html', {'form': register_form})
 
+@login_required(login_url='login')
 def dashboard(request):
-    pass
+    return render(request, 'account/dashboard.html')
 
+@login_required(login_url='login')
 def profile(request):
     pass
+
+def logout(request):
+    auth.logout(request)
+    return redirect('index')

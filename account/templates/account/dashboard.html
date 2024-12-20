@@ -1,0 +1,33 @@
+{% extends 'account/base.html' %}
+{% load static %}
+
+{% block title %}
+    WhatBytes - Dashboard
+{% endblock title %}
+
+
+{% block body %}
+<div class="wrapper">
+    <div id="div-container" class="container">
+        <h1>Welcome back, {{ user.username }}!</h1>
+        <div class="mt-5 text-center">
+            <h4>You can check out your profile clicking down here</h4>
+            <a href="#" class="btn btn-outline-secondary btn-lg w-50 mt-2">
+                My Profile
+            </a>
+        </div>
+        <div class="mt-5 text-center">
+            <h4>Anything Sus? Change your password here</h4>
+            <a href="#" class="btn btn-outline-danger btn-lg w-50 mt-2">
+                Change Password
+            </a>
+        </div>
+        <div class="mt-5 text-center">
+            <h4>Logout here</h4>
+            <a href="{% url 'logout' %}" class="btn btn-outline-warning btn-lg w-50 mt-2">
+                Logout
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock body %}
