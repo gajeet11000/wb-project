@@ -1,13 +1,24 @@
 from django.shortcuts import render, redirect
 
-from .forms import CreateUserForm
+from .forms import CreateUserForm, LoginForm
+from django.contrib import auth
 
 # Create your views here.
 def index(request):
     return render(request, 'account/index.html')
 
 def login(request):
-    return render(request, 'account/login.html')
+    login_form = LoginForm()
+    
+    if request.method == 'POST':
+        filled_form = LoginForm(request, request.POST)
+        if filled_form.is_valid():
+            auth.login(request, filled_form.cleaned_data.get('user'))
+            return redirect('dashboard')
+        else:
+            return render(request, 'account/login.html', {'form': filled_form})
+    
+    return render(request, 'account/login.html', {'form': login_form})
 
 def register(request):
     register_form = CreateUserForm()
