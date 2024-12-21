@@ -4,6 +4,13 @@ from .forms import CreateUserForm, LoginForm
 from django.contrib import auth
 
 from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
+from django.urls import reverse_lazy
+
+from django.contrib import messages
+
 # Create your views here.
 def index(request):
     return render(request, 'account/index.html')
@@ -15,6 +22,7 @@ def login(request):
         filled_form = LoginForm(request, request.POST)
         if filled_form.is_valid():
             auth.login(request, filled_form.cleaned_data.get('user'))
+            messages.success(request, "Logged in successfully.", extra_tags="login")
             return redirect('dashboard')
         else:
             return render(request, 'account/login.html', {'form': filled_form})
@@ -28,6 +36,7 @@ def register(request):
         filled_form = CreateUserForm(request.POST)
         if filled_form.is_valid():
             filled_form.save()
+            messages.success(request, "Registered successfully.", extra_tags="register")
             return redirect('login')
         else:
             return render(request, 'account/register.html', {'form': filled_form})
@@ -44,4 +53,15 @@ def profile(request):
 
 def logout(request):
     auth.logout(request)
+    messages.success(request, "Logged out successfully.", extra_tags="logout")
     return redirect('index')
+
+# @login_required(login_url='login')
+class ChangePasswordView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('dashboard')
+    template_name = 'account/change_password.html'
+    
+    def form_valid(self, form):
+        messages.success(self.request, "Password changed successfully.", extra_tags="password_change")
+        return super().form_valid(form)
