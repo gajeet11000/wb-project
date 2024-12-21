@@ -12,13 +12,13 @@
         <h1>Welcome back, {{ user.username }}!</h1>
         <div class="mt-5 text-center">
             <h4>You can check out your profile clicking down here</h4>
-            <a href="#" class="btn btn-outline-secondary btn-lg w-50 mt-2">
+            <a href="{% url 'profile' %}" class="btn btn-outline-secondary btn-lg w-50 mt-2">
                 My Profile
             </a>
         </div>
         <div class="mt-5 text-center">
             <h4>Anything Sus? Change your password here</h4>
-            <a href="#" class="btn btn-outline-danger btn-lg w-50 mt-2">
+            <a href="{% url 'reset_password' %}" class="btn btn-outline-danger btn-lg w-50 mt-2">
                 Change Password
             </a>
         </div>

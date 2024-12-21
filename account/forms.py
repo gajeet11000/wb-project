@@ -9,6 +9,9 @@ from django.db.models import Q
 from django.contrib import auth
 
 class CreateUserForm(auth_forms.UserCreationForm):
+    email = forms.EmailField(
+        required=True,
+    )
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')

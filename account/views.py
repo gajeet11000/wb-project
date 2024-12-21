@@ -40,7 +40,7 @@ def dashboard(request):
 
 @login_required(login_url='login')
 def profile(request):
-    pass
+    return render(request, 'account/profile.html')
 
 def logout(request):
     auth.logout(request)
