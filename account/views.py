@@ -5,6 +5,7 @@ from django.contrib import auth
 
 from django.contrib.auth.decorators import login_required
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
@@ -56,11 +57,11 @@ def logout(request):
     messages.success(request, "Logged out successfully.", extra_tags="logout")
     return redirect('index')
 
-# @login_required(login_url='login')
-class ChangePasswordView(PasswordChangeView):
+class ChangePasswordView(LoginRequiredMixin, PasswordChangeView):
     form_class = PasswordChangeForm
     success_url = reverse_lazy('dashboard')
     template_name = 'account/change_password.html'
+    login_url = 'login'
     
     def form_valid(self, form):
         messages.success(self.request, "Password changed successfully.", extra_tags="password_change")
